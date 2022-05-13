@@ -1,38 +1,188 @@
+* {
+  font-family: 'Roboto';
+}
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background-color: #F1F1F1;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+header {
+  background-color: white;
+  font-weight: 100;
+  color: black;
+  height: 8vh;
   display: flex;
+  font-size: .7em;
+  min-height: 60px;
+  box-sizing: border-box;
+  align-items: center;
+  flex-direction: row-reverse;
+}
+
+#logo {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin: auto .5em auto 1em;
+}
+
+#appBody {
+  display: flex;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
+  min-height: 82vh;
+}
+
+.inputBox {
+  width: 92vw;
+  padding: 20px;
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#userSearchBox {
+  margin-top: 3em;
+}
+
+.case {
+  padding-left: 10px;
+}
+
+
+.caseBox {
+  width: 100px;
+  color: white;
+  height: 40px;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  background-color: yellow;
+}
+
+.case > h3 {
+  color: #2b2a2a;
+  font-weight: 400;
+  text-align: left;
+}
+
+#searchOutput {
+  min-height: 400px;
+  width: 95%;
+  margin-top: 3em;
+  padding-bottom: 30px;
+  background-color: white;
+  box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.20);
+  display: flex;
+  flex-direction: column;
+}
+
+#searchOutput > h2 {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  background-color: #B6C276;
+  padding: 0 10px;
+  font-weight: 100;
+  color: white;
+  margin: 0;
+}
+
+#signInTitle {
+  font-size: 1.6em;
+  margin-bottom: 1em;
+  font-weight: bold;
+}
+
+#userLoginBox {
+  background-color: white;
+  min-height: 200px;
+  box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.20);
+  border-radius: 2%;
+  align-self: center;
+  width: 70%;
+  max-width: 1000px;
+  justify-self: center;
+}
+
+#userLoginBox > input {
+  background-color: #fafafa;
+}
+
+.inputBox > label {
+  font-size: 1.2em;
+  color: #707070;
+}
+
+textarea:focus, input:focus{
+  outline: none;
+}
+
+.inputBox > input {
+  width: 95%;
+  border-radius: 4px;
+  height: 40px;
+  border: none;
+  padding-left: 10px;
+  box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.20);
+  margin: 1em 0;
+}
+
+.button {
+  border-radius: 3px;
+  min-width: 130px;
+  cursor: pointer;
+  border: none;
+  font-weight: bold;
+  text-align: start;
+  height: 35px;
+  background-color: #738FBF;
+  box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.20);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+#userSearchBox > button:hover {
+  background-color: #6B84AF;
+  transition: .5s;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media only screen and (min-width: 650px) {
+  header {
+    font-size: 1em;
   }
-  to {
-    transform: rotate(360deg);
+
+  #logo {
+    width: 45px;
+    height: 45px;
   }
+
+  #userSearchBox {
+    width: 60vw;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+
+  #appBody {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 0 20px;
+  }
+
+  #userSearchBox {
+    width: 40%;
+  }
+
+  #searchOutput {
+    width: 45%;
+  }
+
 }
