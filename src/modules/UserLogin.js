@@ -10,23 +10,23 @@ function UserLogin(props) {
 
     const postLogin = async (e) => {
         e.preventDefault();
-        var data = qs.stringify({
+        var data = {
             'username': emailRef.current.value,
             'password': passwordRef.current.value 
-        })
+        }
         var config = {
             method: 'post',
-            url: 'https://api.badgr.io/o/token',
+            url: 'http://localhost:3000/auth/login',
             headers: { 
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/json'
             },
             data : data
         };
 
         axios(config)
         .then(function (response) {
-            //console.log(JSON.stringify(response.data.access_token));
-            props.onChange(response.data.access_token)
+            console.log(response.data.accessToken);
+            props.onChange(response.data.accessToken)
             navigate('/search')
         })
         .catch(function (error) {
@@ -38,10 +38,14 @@ function UserLogin(props) {
         <form onSubmit={postLogin} id="userLoginBox" className="inputBox">
             <label id="signInTitle">Log In:</label>
             <label>Email:</label>
-            <input type="text" ref={emailRef}></input>
+            <input type="email" ref={emailRef}></input>
             <label>Password:</label>
             <input type="password" ref={passwordRef}></input>
             <button className="button">Submit</button>
+            <Link to="/register">
+                <button id="registerRedirect">Register Users</button>
+            </Link>
+            
         </form>
     )
 }

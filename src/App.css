@@ -67,6 +67,21 @@ header {
   background-color: yellow;
 }
 
+#registerRedirect {
+  position: absolute;
+  height: 30px;
+  top: -30px;
+  cursor: pointer;
+  border: none;
+  background: #7ebf6f;
+  letter-spacing: 1px;
+  color: white;
+  width: 15%;
+  min-width: 140px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
 .case > h3 {
   color: #2b2a2a;
   font-weight: 400;
@@ -78,6 +93,7 @@ header {
   width: 95%;
   margin-top: 3em;
   padding-bottom: 30px;
+  margin-bottom: 2em;
   background-color: white;
   box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.20);
   display: flex;
@@ -102,13 +118,15 @@ header {
 }
 
 #userLoginBox {
+  position: absolute;
+  z-index: 10;
   background-color: white;
   min-height: 200px;
   box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.20);
   border-radius: 2%;
   align-self: center;
   width: 70%;
-  max-width: 1000px;
+  max-width: 900px;
   justify-self: center;
 }
 
@@ -133,6 +151,11 @@ textarea:focus, input:focus{
   padding-left: 10px;
   box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.20);
   margin: 1em 0;
+}
+.errorMessage {
+  color: red;
+  margin-top: 0;
+  margin-bottom: 10px;
 }
 
 .button {
@@ -173,10 +196,12 @@ textarea:focus, input:focus{
   #appBody {
     flex-direction: row;
     align-items: flex-start;
-    justify-content: space-between;
     padding: 0 20px;
   }
 
+  #userLoginBox {
+    align-self: center;
+  }
   #userSearchBox {
     width: 40%;
   }

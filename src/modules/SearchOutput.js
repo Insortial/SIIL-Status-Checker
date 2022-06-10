@@ -7,7 +7,7 @@ function SearchOutput(props) {
             <h2>{props.name}</h2>
             {
                 props.namebadges.map((badge) => {
-                    console.log(badge)
+                    //console.log(badge)
                     return <Cases key={badge.entityId} type={badge.name} isTrue={badge.finished}/>
                 })
             }
