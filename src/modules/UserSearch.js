@@ -10,12 +10,13 @@ function UserSearch(props) {
         e.preventDefault();
         console.log("Working")
         props.onChange(idRef.current.value);
+        idRef.current.value = "";
     }
 
     return (
         <form onSubmit={handleChange} id="userSearchBox" className="inputBox">
             <label>Enter Student ID:</label>
-            <input type="search" ref={idRef}></input>
+            <input type="search" ref={idRef} autoFocus></input>
             <p className="errorMessage" style={{display: `${!props.valid ? "block" : "none"}`}}>Error: ID is invalid</p>
             <button className="button">Submit</button>
         </form>
