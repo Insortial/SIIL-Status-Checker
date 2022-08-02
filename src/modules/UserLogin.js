@@ -25,9 +25,9 @@ function UserLogin(props) {
 
         axios(config)
         .then(function (response) {
-            console.log(response.data.accessToken);
-            props.onChange(response.data.accessToken)
-            navigate('/search')
+            console.log(response.data.token);
+            props.onChange(response.data.token);
+            navigate('/search');
         })
         .catch(function (error) {
             console.log(error);
