@@ -1,4 +1,5 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function UserRegister() {
     const emailRef = useRef()
@@ -6,6 +7,7 @@ function UserRegister() {
     const firstNameRef = useRef()
     const lastNameRef = useRef()
     const broncoIDRef = useRef()
+    const [hasSubmit, setHasSubmit] = useState(false)
 
 
     const postRegister = (e) => {
@@ -31,27 +33,38 @@ function UserRegister() {
         axios(config)
         .then(function (response) {
             console.log(JSON.stringify(response.data));
+            setHasSubmit(true)
         })
         .catch(function (error) {
             console.log(error);
         });
     }
 
-    return (
-        <form onSubmit={postRegister} id="userLoginBox" className="inputBox">
-            <label id="signInTitle">Register Account:</label>
-            <label>Email:</label>
-            <input type="text" ref={emailRef}></input>
-            <label>Password:</label>
-            <input type="text" ref={passwordRef}></input>
-            <label>First Name:</label>
-            <input type="text" ref={firstNameRef}></input>
-            <label>Last Name:</label>
-            <input type="text" ref={lastNameRef}></input>
-            <label>Bronco ID:</label>
-            <input type="text" ref={broncoIDRef}></input>
-            <button className="button">Submit</button>
-        </form>
+    return ( 
+        <>
+        {hasSubmit ? 
+                (<div>
+                    <h2>Successfully submited</h2>
+                    <Link to="/">
+                        <button className="button">Return to login</button>
+                    </Link>
+                </div>) : 
+                (<form onSubmit={postRegister} id="userLoginBox" className="inputBox">
+                    <h2 className="formTitle">Register Account</h2>
+                    <label>Email:</label>
+                    <input type="text" ref={emailRef}></input>
+                    <label>Password:</label>
+                    <input type="password" ref={passwordRef}></input>
+                    <label>First Name:</label>
+                    <input type="text" ref={firstNameRef}></input>
+                    <label>Last Name:</label>
+                    <input type="text" ref={lastNameRef}></input>
+                    <label>Bronco ID:</label>
+                    <input type="text" ref={broncoIDRef}></input>
+                    <button className="button">Submit</button>
+                </form>)
+        }
+        </>
     )
 }
 

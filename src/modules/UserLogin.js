@@ -36,16 +36,12 @@ function UserLogin(props) {
 
     return (
         <form onSubmit={postLogin} id="userLoginBox" className="inputBox">
-            <label id="signInTitle">Log In:</label>
-            <label>Email:</label>
+            <h2 className="formTitle">Login</h2>
+            <label>Email</label>
             <input type="email" ref={emailRef}></input>
-            <label>Password:</label>
+            <label>Password</label>
             <input type="password" ref={passwordRef}></input>
             <button className="button">Submit</button>
-            <Link to="/register">
-                <button id="registerRedirect">Register Users</button>
-            </Link>
-            
         </form>
     )
 }

@@ -15,13 +15,13 @@ function SearchPage(props) {
     }
 
     const idSearch = async (id) => {
-        var axios = require('axios');
-        var config = {
-        method: 'get',
-        url: `http://localhost:3000/cert/${id}`,
-        headers: { 
-            'Authorization': `Bearer ${props.token}`
-        }
+        let axios = require('axios');
+        let config = {
+            method: 'get',
+            url: `http://localhost:3000/cert/${id}`,
+            headers: { 
+                'Authorization': `Bearer ${props.token}`
+            }
         };
 
         axios(config)

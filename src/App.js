@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
+import { Route, Routes, BrowserRouter as Router, Link} from 'react-router-dom';
 import './normalize.css';
 import logo from './SIIL-Logo.png'
 import UserLogin from './modules/UserLogin';
@@ -18,8 +18,13 @@ function App() {
     <Router>
         <div className="App">
           <header>
-            <img alt="Student Innovation Idea Labs Logo" src={logo} id="logo" />
-            <h3>Student Innovation Idea Labs</h3>
+            <div id="navigation">
+              <Link to="/register" className="navLinks">Register</Link>
+            </div>
+            <div id="logoDiv">
+              <img alt="Student Innovation Idea Labs Logo" src={logo} id="logo" />
+              <h3>Student Innovation Idea Labs</h3>
+            </div>
           </header>
           <div id="appBody">
             <Routes>
