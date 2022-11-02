@@ -1,42 +1,44 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Route, Routes, useNavigate } from 'react-router';
-import axios from 'axios'
 import SearchOutput from './SearchOutput';
+import { UserInfo } from './UserInfoContext';
 import UserSearch from './UserSearch';
+import useAxiosPrivate from '../hooks/useAxiosPrivate'
 
 function SearchPage(props) {
     const [valid, setValid] = React.useState(true)
     const [badges, setBadges] = React.useState([]);
     const navigate = useNavigate();
     const [name, setName] = React.useState("")
+    const { accessToken } = UserInfo()
+    const axiosPrivate = useAxiosPrivate();
+    let controller;
 
     const updateID = (input) => {
         idSearch(input)
     }
 
     const idSearch = async (id) => {
-        let axios = require('axios');
-        let config = {
-            method: 'get',
-            url: `http://localhost:3000/cert/${id}`,
-            headers: { 
-                'Authorization': `Bearer ${props.token}`
+        controller = new AbortController();
+        try {
+            const response = await axiosPrivate.get(`/cert/${id}`, {
+                signal: controller.signal
+            })
+            if(!response) {
+                navigate('/login')
+                return
             }
-        };
-
-        axios(config)
-        .then(function (response) {
             console.log(JSON.stringify(response.data));
             setValid(true)
             setBadges(response.data.badges)
             setName(response.data.name)
             navigate('/search/active')
-        })
-        .catch(function (error) {
-            console.log(error);
+            controller.abort()
+        } catch(err) {
+            console.error(err)
             setValid(false);
             navigate('/search')
-        });
+        }
     }
 
     return (

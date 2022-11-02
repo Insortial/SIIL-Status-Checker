@@ -1,7 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Cases from './Cases';
 
 function SearchOutput(props) {
+    useEffect(() => {
+        return () => {
+        
+        }
+    }, [props])
+    
     return (
         <div id="searchOutput">
             <h2>{props.name}</h2>

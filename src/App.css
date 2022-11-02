@@ -1,6 +1,10 @@
 * {
   font-family: 'Source Sans Pro';
 }
+
+input {
+  height: 50px;
+}
 .App {
   text-align: center;
 }
@@ -28,6 +32,7 @@ header {
 
 .navLinks {
   text-decoration: none;
+  margin-right: 1em ;
   color: black;
   cursor: pointer;
 }
@@ -103,6 +108,44 @@ header {
   border-top-left-radius: 5px;
 }
 
+.checkForm {
+  width: 60%;
+}
+
+.checkForm  > select {
+  width: 100%;
+  height: 50px;
+  margin: 1em 0;
+  outline: none;
+}
+
+.menuNav {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.menuNav > button {
+  width: 50%;
+  height: 5vh;
+  text-align: center;
+  font-weight: bold;
+}
+
+.timeRow {
+  display: flex;
+  flex-direction: row;
+  margin: 1em 0;
+}
+
+.timeRow > div {
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  width: 30%;
+  margin-right: 1em;
+}
+
 .case > h3 {
   color: #2b2a2a;
   font-weight: 400;
@@ -145,7 +188,7 @@ header {
   position: absolute;
   bottom: -5px;
   width: 60%;
-  border-bottom: 3px solid #7ebf6f;
+  border-bottom: 3px solid black;
 }
 
 #userLoginBox {
@@ -184,6 +227,37 @@ textarea:focus, input:focus{
   color: red;
   margin-top: 0;
   margin-bottom: 10px;
+}
+
+.menuButton {
+  min-width: 700px;
+  text-align: left;
+  height: 100px;
+  margin-bottom: 2em;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  align-items: center;
+}
+
+.menuButton > h2 {
+  font-size: 2em;
+}
+
+.reactLink {
+  text-decoration: none;
+}
+
+.logo {
+  width: 15%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.10);
+  background-image: url("./logo.svg");
+  background-size: 80%;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-right: 10px;
 }
 
 .button {

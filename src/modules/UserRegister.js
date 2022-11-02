@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+const axios = require('axios');
 
 function UserRegister() {
     const emailRef = useRef()
@@ -12,8 +13,7 @@ function UserRegister() {
 
     const postRegister = (e) => {
         e.preventDefault()
-        var axios = require('axios');
-        var data = JSON.stringify({
+        let data = JSON.stringify({
             "email": emailRef.current.value,
             "password": passwordRef.current.value,
             "firstName": firstNameRef.current.value,
@@ -21,7 +21,7 @@ function UserRegister() {
             "broncoID": broncoIDRef.current.value
         });
 
-        var config = {
+        let config = {
         method: 'post',
         url: 'http://localhost:3000/auth/register',
         headers: { 

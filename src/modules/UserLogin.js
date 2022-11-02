@@ -1,32 +1,51 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import axios from 'axios';
 import qs from 'qs';
+import { LogInUpdate, UserInfoUpdate } from './UserInfoContext';
 import { Link, useNavigate } from 'react-router-dom';
 
 function UserLogin(props) {
     const navigate = useNavigate();
+    let isMounted = false;
+    let controller;
     const emailRef = useRef();
     const passwordRef = useRef();
+    const updateUser = UserInfoUpdate();
+    const updateLogIn = LogInUpdate();
+
+    useEffect(() => {
+        controller = new AbortController();
+        isMounted = true
+    
+        return () => {
+            isMounted = false
+            controller.abort()
+        }
+    }, [])
+    
 
     const postLogin = async (e) => {
         e.preventDefault();
-        var data = {
+        let data = {
             'username': emailRef.current.value,
             'password': passwordRef.current.value 
         }
-        var config = {
+        
+        let config = {
             method: 'post',
-            url: 'http://localhost:3000/auth/login',
+            url: 'http://localhost:4000/login',
+            withCredentials: true,
             headers: { 
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
             data : data
         };
 
         axios(config)
         .then(function (response) {
-            console.log(response.data.token);
-            props.onChange(response.data.token);
+            console.log(response.data);
+            updateUser(response.data)
+            updateLogIn(true)
             navigate('/search');
         })
         .catch(function (error) {
