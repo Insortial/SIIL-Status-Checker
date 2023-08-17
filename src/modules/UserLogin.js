@@ -46,7 +46,7 @@ function UserLogin(props) {
             console.log(response.data);
             updateUser(response.data)
             updateLogIn(true)
-            navigate('/search');
+            navigate('/');
         })
         .catch(function (error) {
             console.log(error);

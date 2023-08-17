@@ -14,14 +14,15 @@ function SearchPage(props) {
     const axiosPrivate = useAxiosPrivate();
     let controller;
 
-    const updateID = (input) => {
-        idSearch(input)
+    const updateEmail = (input) => {
+        emailSearch(input)
     }
 
-    const idSearch = async (id) => {
+    const emailSearch = async (email) => {
+        console.log("EMAIL SEARCH WORKING")
         controller = new AbortController();
         try {
-            const response = await axiosPrivate.get(`/cert/${id}`, {
+            const response = await axiosPrivate.get(`/cert/${email}`, {
                 signal: controller.signal
             })
             if(!response) {
@@ -43,7 +44,7 @@ function SearchPage(props) {
 
     return (
         <>
-            <UserSearch onChange={updateID} valid={valid}/>
+            <UserSearch onChange={updateEmail} valid={valid}/>
             <Routes>
                <Route path="/active" element={<SearchOutput name={name} namebadges={badges}/>}/>   
             </Routes>

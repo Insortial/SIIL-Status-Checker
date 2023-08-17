@@ -1,24 +1,46 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import logo from '../SIIL-Logo.png'
-import { UserInfo } from './UserInfoContext';
+import { LogInUpdate, UserInfo } from './UserInfoContext';
 
 export default function Navigation() {
+    const { loggedIn } = UserInfo();
+    const updateLogIn = LogInUpdate(); 
+    const [minMenu, setMinMenu] = useState(isMinMenu);
+    const [menuExpanded, setMenuExpanded] = useState(false);
+    const [windowSize, setWindowSize] = useState(getWindowSize());
 
-    const { loggedIn } = UserInfo()
+    useEffect(() => {
+        console.log(windowSize.innerWidth)
+        setMinMenu(windowSize.innerWidth <= 650)
+    }, [windowSize])
+
+    useEffect(() => {
+        console.log(loggedIn)
+        function handleWindowResize() {
+            setWindowSize(getWindowSize());
+        }
+
+        window.addEventListener('resize', handleWindowResize);
+
+        return () => {
+            window.removeEventListener('resize', handleWindowResize);
+        }
+    }, [])
 
     return (
-        <header>
-            <div id="navigation">
+        <header id="mainNav">
+            <div id="navButton" style={{display: minMenu ? "flex" : "none"}} onClick={() => setMenuExpanded(!menuExpanded)}>...</div>
+            <div id="navigation" style={{top: menuExpanded ? "60px" : "-1000px"}}>
                 {!loggedIn || loggedIn === "none" ? ( //Checks if user has token, changes nav if they do or don't
                 <>
-                    <Link to="/" className='navLinks'>Login</Link>
+                    <Link to="/login" className='navLinks'>Login</Link>
                     <Link to="/register" className='navLinks'>Register</Link>
                 </>
                 ) : (
                 <>
-                    <Link to="/search" className='navLinks'>Search</Link>
-                    <Link to="/menu" className='navLinks'>Menu</Link>
+                    <Link to="/" className='navLinks'>Menu</Link>
+                    <Link to="/login" onClick={() => updateLogIn(false)} className='navLinks' style={{color: 'black'}}>Logout</Link>
                 </>
                 )
                 }
@@ -29,4 +51,14 @@ export default function Navigation() {
             </div>
         </header>
     )
+}
+
+function getWindowSize() {
+    const {innerWidth, innerHeight} = window;
+    return {innerWidth, innerHeight};
+}
+
+function isMinMenu() {
+    const { innerWidth } = window;
+    return innerWidth <= 650
 }

@@ -13,8 +13,23 @@ body {
   background-color: #FBFBFB;
 }
 
-header {
+#subButtonRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#navButton {
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  cursor: pointer;
+  height: 100%;
+}
+
+#mainNav {
   background-color: white;
+  width: 100vw;
   color: black;
   height: 8vh;
   display: flex;
@@ -26,13 +41,86 @@ header {
   justify-content: space-between;
 }
 
+.modal {
+  width: 80vw;
+  max-width: 600px;
+  min-height: 300px;
+  background-color: white;
+}
+
+.exitButton {
+  position: fixed;
+  height: 3vw;
+  width: 3vw;
+  top: 10px;
+  right: 10px;
+  background-image: url('../src/Exit.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 20;
+}
+
+.exitButton:hover {
+  cursor: pointer;
+}
+
+.modal > header {
+  display: flex;
+  align-items: center;
+  min-height: 60px;
+  color: white;
+  background-color: #707070;
+  text-align: left;
+  padding-left: 20px;
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+.modalScreen {
+  display: flex;
+  position: fixed;
+  top:0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 30;
+  align-items: center; 
+  justify-content: center;
+}
+
+#checkIn {
+  background-color: #538AAF;
+}
+
+#checkOut {
+  background-color: #F3BF71;
+}
+
 #navigation {
+  position: absolute;
+  text-align: start;
+  z-index: 20;
+  width: 200px;
+  top: -1000px;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: black;
+  display: flex;
+  flex-direction: column;
   padding-left: 10px;
+}
+
+#buttonRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .navLinks {
   text-decoration: none;
-  margin-right: 1em ;
+  margin-bottom: 10px;
+  margin-right: 1em;
   color: black;
   cursor: pointer;
 }
@@ -57,6 +145,8 @@ header {
 
 #logoDiv {
   display: flex;
+  justify-self: flex-end;
+  margin-left: auto;
   flex-direction: row-reverse;
 }
 
@@ -72,9 +162,11 @@ header {
   box-sizing: border-box;
   flex-direction: column;
   align-items: flex-start;
+  padding: 20px;
 }
 
 #userSearchBox {
+  width: 90vw;
   margin-top: 3em;
 }
 
@@ -109,7 +201,7 @@ header {
 }
 
 .checkForm {
-  width: 60%;
+  width: 100%;
 }
 
 .checkForm  > select {
@@ -180,6 +272,7 @@ header {
   margin-bottom: 1em;
   font-weight: normal;
   position: relative;
+  z-index: 2;
 }
 
 .formTitle::before {
@@ -230,10 +323,10 @@ textarea:focus, input:focus{
 }
 
 .menuButton {
-  min-width: 700px;
+  width: 80vw;
   text-align: left;
-  height: 100px;
-  margin-bottom: 2em;
+  height: 80px;
+  margin-bottom: 1.5em;
   color: white;
   display: flex;
   flex-direction: row;
@@ -242,7 +335,7 @@ textarea:focus, input:focus{
 }
 
 .menuButton > h2 {
-  font-size: 2em;
+  font-size: 1.5em;
 }
 
 .reactLink {
@@ -250,7 +343,7 @@ textarea:focus, input:focus{
 }
 
 .logo {
-  width: 15%;
+  width: 20%;
   height: 100%;
   background-color: rgba(0,0,0,0.10);
   background-image: url("./logo.svg");
@@ -278,9 +371,30 @@ textarea:focus, input:focus{
   transition: .5s;
 }
 
+
 @media only screen and (min-width: 650px) {
   header {
     font-size: 1em;
+  }
+
+  .logo {
+    width: 15%;
+    height: 100%;
+  }
+
+  .menuButton {
+    width: 700px;
+    height: 100px;
+    margin-bottom: 2em;
+  }
+
+  .menuButton > h2 {
+    font-size: 2em;
+  }
+
+  #navigation {
+    position: inherit;
+    flex-direction: row;
   }
 
   #logo {
@@ -293,17 +407,27 @@ textarea:focus, input:focus{
   }
 }
 
-@media only screen and (min-width: 1000px) {
+@media only screen and (min-width: 850px) {
+  #subButtonRow {
+    flex-direction: row;
+  }
 
+  #checkIn {
+    margin-right: 10px;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
   #appBody {
     flex-direction: row;
     padding: 0 20px;
-    justify-content: center;
+    justify-content: space-around;
     align-items: baseline;
   }
 
   #userSearchBox {
     width: 40%;
+    min-width: 500px;
   }
 
   #searchOutput {

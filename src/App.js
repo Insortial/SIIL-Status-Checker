@@ -8,6 +8,8 @@ import UserRegister from './modules/UserRegister';
 import Menu from './modules/Menu';
 import CardLog from './modules/CardLog';
 import Navigation from './modules/Navigation';
+import Layout from './modules/Layout';
+import Auth from './modules/Auth';
 
 function App() {
 
@@ -15,17 +17,28 @@ function App() {
     <Router>
         <div className="App">
             <Navigation/>
-            <div id="appBody">
               <Routes>
-                <Route path="/login" element={<UserLogin/>}/>
-                <Route path="/search/*" element={<SearchPage />}/>
-                <Route path="/register" element={<UserRegister/>}/>
-                <Route path="/menu" element={<Menu />}/>
-                <Route path="/menu/iLab" element={<CardLog place="iLab"/>}/>
-                <Route path="/menu/MS" element={<CardLog place="MS"/>}/>
-                <Route path="/menu/IO" element={<CardLog place="IO"/>}/>
+                <Route path="/" element={<Layout/>}>
+                  <Route path="/login" element={<UserLogin/>}/>
+                  <Route path="/register" element={<UserRegister/>}/>
+
+                  <Route element={<Auth />}>
+                    <Route path="/" element={<Menu />}/>
+                  </Route>
+
+                  <Route element={<Auth />}>
+                    <Route path="/menu/iLab/*" element={<CardLog place="iLab"/>}/>
+                  </Route>
+
+                  <Route element={<Auth />}>
+                    <Route path="/menu/MS/*" element={<CardLog place="MS"/>}/>
+                  </Route>
+                  
+                  <Route element={<Auth />}>
+                    <Route path="/menu/IO/*" element={<CardLog place="IO"/>}/>
+                  </Route>
+                </Route>
               </Routes>
-            </div>
           </div>
     </Router>
   );

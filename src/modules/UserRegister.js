@@ -23,7 +23,7 @@ function UserRegister() {
 
         let config = {
         method: 'post',
-        url: 'http://localhost:3000/auth/register',
+        url: 'http://localhost:4000/register',
         headers: { 
             'Content-Type': 'application/json'
         },

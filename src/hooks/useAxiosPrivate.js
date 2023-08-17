@@ -27,6 +27,7 @@ const useAxiosPrivate = () => {
                 if (error?.response?.status === 401 && !prevRequest?.sent) {
                     prevRequest.sent = true;
                     const newAccessToken = await refresh();
+                    console.log(newAccessToken)
                     if(!newAccessToken) 
                     {
                         updateLogIn(false)
