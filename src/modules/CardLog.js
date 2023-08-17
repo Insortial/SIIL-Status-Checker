@@ -11,6 +11,14 @@ import UserSearch from './UserSearch';
 function CardLog(props) {
   const [isCheckIn, setIsCheckIn] = React.useState(false);
   const [isCheckOut, setIsCheckOut] = React.useState(false)
+  // This is to check if there is equipment in the checkout or checkin list before submitting
+  const[equipV,setequipV]=React.useState(true);
+  // this is to check if the user checker email is valid
+  const [valid, setValid] = React.useState(true)
+  // This is to check if the email for checkout is valid/nonempty
+  const [emailV,setemailV]= React.useState(true)
+
+
   const [email, setEmail] = React.useState("")
   const location = useLocation();
   const navigate = useNavigate();
@@ -24,7 +32,6 @@ function CardLog(props) {
   const iLabColor = "#DB8B54";
   const MSColor = "#7DC85F";
   const IOColor = "#416C86";
-  const [valid, setValid] = React.useState(true)
   const [badges, setBadges] = React.useState([]);
   const [name, setName] = React.useState("")
 
@@ -108,6 +115,23 @@ function CardLog(props) {
 
   const formSubmit = async (e) => {
     e.preventDefault()
+
+
+    if(checkInEmailRef === undefined && checkInEmailRef.current.value.trim().length === 0) {
+      setemailV(false)
+      return
+    } else{
+      setemailV(true)
+    }
+    
+    if(selValue == "Empty"){
+      setequipV(false)
+      console.log("IM HERE")
+      return
+    } else{
+      setequipV(true)
+    }
+
     let controller = new AbortController();
     let decodedSel = selValue.split(" - ");
     let selEquip = equipment.find((e) => e.name == decodedSel[0] && e.identifier == decodedSel[1]);
@@ -195,8 +219,11 @@ function CardLog(props) {
                   })
                   }
                   </select>
+                  <p className="errorMessage" style={{display: `${!equipV? "block" : "none"}`}}>Error: No Equipment Found</p>     
                   <label>Enter E-Mail:</label>
                   <input type="email" ref={checkInEmailRef} value={email} onChange={(input) => setEmail(input.target.value)}></input>
+                  <p className="errorMessage" style={{display: `${!emailV? "block" : "none"}`}}>Error: Enter a valid Email</p>     
+
                   <button style={{backgroundColor: color}} className="button">Submit</button>
               </form>
             </>
