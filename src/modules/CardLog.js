@@ -108,6 +108,13 @@ function CardLog(props) {
 
   const formSubmit = async (e) => {
     e.preventDefault()
+
+    if(selEquip.strip().length === 0)
+    {
+      
+      return 
+    }
+
     let controller = new AbortController();
     let decodedSel = selValue.split(" - ");
     let selEquip = equipment.find((e) => e.name == decodedSel[0] && e.identifier == decodedSel[1]);
