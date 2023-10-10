@@ -11,6 +11,14 @@ import UserSearch from './UserSearch';
 function CardLog(props) {
   const [isCheckIn, setIsCheckIn] = React.useState(false);
   const [isCheckOut, setIsCheckOut] = React.useState(false)
+  // This is to check if there is equipment in the checkout or checkin list before submitting
+  const[equipV,setequipV]=React.useState(true);
+  // this is to check if the user checker email is valid
+  const [valid, setValid] = React.useState(true)
+  // This is to check if the email for checkout is valid/nonempty
+  const [emailV,setemailV]= React.useState(true)
+
+
   const [email, setEmail] = React.useState("")
   const location = useLocation();
   const navigate = useNavigate();
@@ -24,20 +32,19 @@ function CardLog(props) {
   const iLabColor = "#DB8B54";
   const MSColor = "#7DC85F";
   const IOColor = "#416C86";
-  const [valid, setValid] = React.useState(true)
   const [badges, setBadges] = React.useState([]);
   const [name, setName] = React.useState("")
 
     const updateEmail = (e) => {
         e.preventDefault()
-        setEmail(emailRef.current.value)
-        emailSearch(emailRef.current.value)
+        //setEmail(emailRef.current.value)
+        idSearch(emailRef.current.value)
     }
 
-    const emailSearch = async (email) => {
+    const idSearch = async (id) => {
         let controller = new AbortController();
         try {
-            const response = await axiosPrivate.get(`/cert/${email}`, {
+            const response = await axiosPrivate.get(`/cert/${id}`, {
                 signal: controller.signal
             })
             if(!response) {
@@ -109,10 +116,20 @@ function CardLog(props) {
   const formSubmit = async (e) => {
     e.preventDefault()
 
-    if(selEquip.strip().length === 0)
-    {
-      
-      return 
+
+    if(checkInEmailRef === undefined && checkInEmailRef.current.value.trim().length === 0) {
+      setemailV(false)
+      return
+    } else{
+      setemailV(true)
+    }
+    
+    if(selValue == "Empty"){
+      setequipV(false)
+      console.log("IM HERE")
+      return
+    } else{
+      setequipV(true)
     }
 
     let controller = new AbortController();
@@ -202,8 +219,11 @@ function CardLog(props) {
                   })
                   }
                   </select>
+                  <p className="errorMessage" style={{display: `${!equipV? "block" : "none"}`}}>Error: No Equipment Found</p>     
                   <label>Enter E-Mail:</label>
                   <input type="email" ref={checkInEmailRef} value={email} onChange={(input) => setEmail(input.target.value)}></input>
+                  <p className="errorMessage" style={{display: `${!emailV? "block" : "none"}`}}>Error: Enter a valid Email</p>     
+
                   <button style={{backgroundColor: color}} className="button">Submit</button>
               </form>
             </>
@@ -215,7 +235,7 @@ function CardLog(props) {
 
       <form onSubmit={(e) => updateEmail(e)} id="userSearchBox" className="inputBox">
         <h2 className='formTitle'>Check Certification - {props.place}</h2>
-        <label>Enter Student Email:</label>
+        <label>Enter Bronco ID:</label>
         <input type="search" ref={emailRef} autoFocus></input>
         <p className="errorMessage" style={{display: `${!valid? "block" : "none"}`}}>Error: ID is invalid</p>
         <nav id="buttonRow">

@@ -13,6 +13,10 @@ body {
   background-color: #FBFBFB;
 }
 
+#registerSelect {
+  margin: 10px 0;
+}
+
 #subButtonRow {
   display: flex;
   flex-direction: column;

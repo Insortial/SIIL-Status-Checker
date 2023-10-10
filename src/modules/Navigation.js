@@ -40,6 +40,7 @@ export default function Navigation() {
                 ) : (
                 <>
                     <Link to="/" className='navLinks'>Menu</Link>
+                    <Link to="/register" className='navLinks'>Register</Link>
                     <Link to="/login" onClick={() => updateLogIn(false)} className='navLinks' style={{color: 'black'}}>Logout</Link>
                 </>
                 )

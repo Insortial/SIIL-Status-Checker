@@ -18,11 +18,11 @@ function SearchPage(props) {
         emailSearch(input)
     }
 
-    const emailSearch = async (email) => {
+    const emailSearch = async (id) => {
         console.log("EMAIL SEARCH WORKING")
         controller = new AbortController();
         try {
-            const response = await axiosPrivate.get(`/cert/${email}`, {
+            const response = await axiosPrivate.get(`/cert/${id}`, {
                 signal: controller.signal
             })
             if(!response) {

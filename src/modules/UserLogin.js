@@ -56,8 +56,8 @@ function UserLogin(props) {
     return (
         <form onSubmit={postLogin} id="userLoginBox" className="inputBox">
             <h2 className="formTitle">Login</h2>
-            <label>Email</label>
-            <input type="email" ref={emailRef}></input>
+            <label>Bronco ID:</label>
+            <input type="text" ref={emailRef}></input>
             <label>Password</label>
             <input type="password" ref={passwordRef}></input>
             <button className="button">Submit</button>
