@@ -346,7 +346,6 @@ textarea:focus, input:focus{
   width: 20%;
   height: 100%;
   background-color: rgba(0,0,0,0.10);
-  background-image: url("./logo.svg");
   background-size: 80%;
   background-repeat: no-repeat;
   background-position: center;

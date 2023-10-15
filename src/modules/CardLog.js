@@ -240,8 +240,8 @@ function CardLog(props) {
         <p className="errorMessage" style={{display: `${!valid? "block" : "none"}`}}>Error: ID is invalid</p>
         <nav id="buttonRow">
           <div id="subButtonRow">
-            <button id="checkIn" className="button" type="button" onClick={() => setIsCheckIn(true)}>Check In</button>
-            <button id="checkOut" className="button" type="button" onClick={() => setIsCheckOut(true)}>Check Out</button>
+          <button id="checkOut" className="button" type="button" onClick={() => setIsCheckOut(true)}>Use</button>
+          <button id="checkIn" className="button" type="button" onClick={() => setIsCheckIn(true)}>Return</button>
           </div>
           <button className="button">Submit</button>
         </nav>
