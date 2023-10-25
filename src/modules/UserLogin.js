@@ -69,7 +69,7 @@ function UserLogin(props) {
                 variant="outlined"
                 fullWidth
             />
-            {/* password visibility with mui's features */}
+            {/* toggling password visibility + the input box */}
             <label>Password</label>
             <TextField
                 type={showPassword ? 'text' : 'password'}
@@ -81,29 +81,22 @@ function UserLogin(props) {
                         <IconButton
                             size="small"
                             onClick={togglePasswordVisibility}
+                            onMouseDown={(e) => e.preventDefault()}
                         >
                             {showPassword ? (
-                                <VisibilityOff fontSize="small" />
-                            ) : (
                                 <Visibility fontSize="small" />
+                            ) : (
+                                <VisibilityOff fontSize="small" />
                             )}
                         </IconButton>
                     ),
                 }}
             />
-            {/* spacing it out before the submit button */}
-            <div style={{ marginTop: '10px' }}>
-                <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    fullWidth
-                >
-                    Submit
-                </Button>
-            </div>
+
+        <button className="button">Submit</button>
+
         </form>
-    )
+    );
 }
 
 export default UserLogin;
