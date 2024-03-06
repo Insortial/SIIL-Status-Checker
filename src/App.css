@@ -363,7 +363,7 @@ textarea:focus, input:focus{
   cursor: pointer;
   border: none;
   font-weight: normal;
-  text-align: start;
+  text-align: center;
   align-self: flex-end;
   height: 35px;
   background-color: #01426a;
