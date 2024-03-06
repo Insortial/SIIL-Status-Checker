@@ -25,13 +25,20 @@ function UserRegister() {
         console.log(e.target.value)
     }
 
-    const formValidation = (e) => {
+    const formValidation = (e, doSubmit=true) => {
         e.preventDefault()
         if(broncoIDRef.current.value.trim().length === 0)
         {
             setIdError("Please enter a value")
         } else {
             setIdError(false)
+        }
+
+        // TODO: Add more cases for checking valid bronco IDs
+        let regex = /^\d{8,10}$/;
+        console.log(regex.test(broncoIDRef.current.value.trim()), broncoIDRef.current.value.trim());
+        if (!regex.test(broncoIDRef.current.value.trim())) {
+            setIdError("Invalid bronco ID");
         }
 
         if(typeOfAccount != "Student" )
@@ -43,14 +50,15 @@ function UserRegister() {
                 setPasswordError(false)
             }
         }
-
-        if(idError === false || passwordError === false)
-        {
-            postRegister()
-        } else {
-            return
+        
+        if (doSubmit === true) {
+            if(idError === false && passwordError === false)
+            {
+                postRegister()
+            } else {
+                return
+            }
         }
-
     }
 
     const postRegister = () => {
@@ -97,22 +105,16 @@ function UserRegister() {
                             <option value={"Ambassador"}>Ambassador</option>
                             <option value={"Staff"}>Staff</option>
                         </select>
-                        {typeOfAccount == "Student" ? (<>
-                            <label>Bronco ID:</label>
-                            <input type="text" ref={broncoIDRef}></input>
-                            <p className="errorMessage" style={{display: `${idError === false ? "none" : "block"}`}}>Error: {idError}</p>
-                            <p className="errorMessage" style={{display: `${emailError === false ? "none" : "block"}`}}>Error: {emailError}</p>
-                            <button className="button">Submit</button>
-                        </>) : (<>
-                            <label>Bronco ID:</label>
-                            <input type="text" ref={broncoIDRef}></input>
-                            <p className="errorMessage" style={{display: `${idError === false ? "none" : "block"}`}}>Error: {idError}</p>
-                            <p className="errorMessage" style={{display: `${emailError === false ? "none" : "block"}`}}>Error: {emailError}</p>
+                        <label>Bronco ID:</label>
+                        <input type="text" ref={broncoIDRef} onChange={(e) => formValidation(e, false)}></input>
+                        <p className="errorMessage" style={{display: `${idError === false ? "none" : "block"}`}}>Error: {idError}</p>
+                        <p className="errorMessage" style={{display: `${emailError === false ? "none" : "block"}`}}>Error: {emailError}</p>
+                        {typeOfAccount == "Student" ? (<></>) : (<>
                             <label>Password:</label>
                             <input type="password" ref={passwordRef}></input>
                             <p className="errorMessage" style={{display: `${passwordError === false ? "none" : "block"}`}}>Error: {passwordError}</p>
-                            <button className="button">Submit</button>
                         </>) }
+                        <button className="button">Submit</button>
                     </form>
                 </>)
         }
